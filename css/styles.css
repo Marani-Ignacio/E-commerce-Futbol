@@ -119,7 +119,6 @@ main{
     border-radius: 1rem;
     height: 300px;
     align-items: center;
-    margin-left: 30px;
 }
 
 .camiseta-detalles{
@@ -132,10 +131,13 @@ main{
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    max-width: 300px;
+    justify-content: center;
 }
 
-.camiseta-titulo{
+.camiseta-titulo, .camiseta-precio{
     font-size: 1rem;
+    margin-left: 0.5rem;
 }
 
 .camiseta-agregar{
@@ -174,6 +176,7 @@ main{
 .carrito-camiseta{
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
     align-items: center;
     background-color: lightgray;
     color: rgb(32, 151, 145);
@@ -191,15 +194,7 @@ main{
     min-width: 450px;
 }
 
-.carrito-camiseta-cantidad{
-    min-width: 100px;
-}
-
-.carrito-camiseta-precio{
-    min-width: 100px;
-}
-
-.carrito-camiseta-subtotal{
+.carrito-camiseta-cantidad, .carrito-camiseta-precio, .carrito-camiseta-subtotal{
     min-width: 100px;
 }
 
@@ -245,7 +240,7 @@ main{
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     color: rgb(32, 151, 145);
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .carrito-acciones-comprar{
@@ -258,6 +253,119 @@ main{
     cursor: pointer;
 }
 
+.header-mobile{
+    display: none;
+}
+
+.cerrar-menu{
+    display: none;
+}
+
 .disabled{
     display: none;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 600px){
+    .wrapper{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside{
+        position: fixed;
+        z-index: 9;
+        background-color: rgb(32, 151, 145);
+        left: 0;
+        box-shadow: 0 0 0 100vmax rgb(0, 0, 0, 0.75);
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s;
+    }
+
+    .aside-visible{
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    main{
+        margin: 1rem;
+        margin-top: 0;
+        padding: 2rem;
+    }
+
+    .contenedor-camisetas{
+        grid-template-columns: 1fr 1fr;;
+    }
+
+    .header-mobile{
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-mobile .logo{
+        color: white;
+    }
+
+    .abrir-menu, .cerrar-menu{
+        background-color: transparent;
+        color: white;
+        border: 0;
+        font-size: 2rem;
+    }
+
+    .cerrar-menu{
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .camiseta-imagen{
+        height: 200px;
+    }
+
+    .camiseta-titulo, .camiseta-precio{
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+    }
+
+    .carrito-camiseta{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .carrito-camiseta-imagen{
+        width: 100%;
+        border-radius: 1rem;
+        
+    }
+    
+    .carrito-camiseta-titulo, .carrito-camiseta-cantidad, .carrito-camiseta-precio, .carrito-camiseta-subtotal{
+        margin-left: 1rem;
+    }
+
+    .carrito-acciones-vaciar{
+        max-width: 75px;
+        font-size: 0.6rem;        
+    }
+    
+    .carrito-acciones-total{
+        max-width: 150px;
+        font-size: 0.7rem; 
+        align-items: center;
+        gap: 0.2rem;
+    }
+    
+    .carrito-acciones-comprar{
+        max-width: 75px;
+        font-size: 0.6rem; 
+    }
 }
