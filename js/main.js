@@ -1,4 +1,4 @@
-let productos = [];
+let camisetas = [];
 fetch("./js/camisetas.json")
     .then(response => response.json())
     .then(data => {
