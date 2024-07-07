@@ -67,6 +67,27 @@ function actualizarBotonesEliminar(){
 }
 
 function eliminarDelCarrito(e){
+
+    Toastify({
+        text: "Camiseta eliminada",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right", 
+        stopOnFocus: true,
+        style: {
+            background: "linear-gradient(to right, rgb(184, 70, 41), rgb(170, 166, 172))",
+            borderRadius: "2rem",
+            fontSize: "0.75rem",
+        },
+        offset: {
+            x: "1.5rem",
+            y: "1.5rem"
+        },
+        onClick: function(){}
+      }).showToast();
+
+
     const idBoton = e.currentTarget.id;
     const index = camisetasEnCarrito.findIndex(camiseta => camiseta.id === idBoton);
     camisetasEnCarrito.splice(index, 1);
@@ -76,9 +97,28 @@ function eliminarDelCarrito(e){
 
 botonVaciar.addEventListener("click", vaciarCarrito);
 function vaciarCarrito(){
-    camisetasEnCarrito.length = 0;
-    localStorage.setItem("camisetas-en-carrito", JSON.stringify(camisetasEnCarrito));
-    cargarCamisetasCarrito();
+
+    Swal.fire({
+        title: "¿Estas seguro?",
+        text: "Se borrarán todas tus camisetas!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si",
+        cancelButtonText: "No"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            camisetasEnCarrito.length = 0,
+            localStorage.setItem("camisetas-en-carrito", JSON.stringify(camisetasEnCarrito));
+            cargarCamisetasCarrito();
+          Swal.fire({
+            title: "Realizado",
+            text: "Tus camisetas han sido eliminadas.",
+            icon: "success"
+          });
+        }
+      });    
 }
 
 function actualizarTotal(){

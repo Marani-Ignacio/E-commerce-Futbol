@@ -1,128 +1,10 @@
-const camisetas = [
-    //Remeras de Clubes
-    {
-        id: "club-01",
-        titulo: "Bayern Munich",
-        imagen: "images/remeras clubes/Bayern Munich.webp",
-        categoria: {
-            id: "clubes",
-            nombre: "Camisetas de Clubes",
-        },
-        precio: 80000
-    },
-    {
-        id: "club-02",
-        titulo: "Inter",
-        imagen: "images/remeras clubes/Inter.webp",
-        categoria: {
-            id: "clubes",
-            nombre: "Camisetas de Clubes",
-        },
-        precio: 82500
-    },
-    {
-        id: "club-03",
-        titulo: "Liverpool",
-        imagen: "images/remeras clubes/Liverpool.jpg",
-        categoria: {
-            id: "clubes",
-            nombre: "Camisetas de Clubes",
-        },
-        precio: 75000
-    },
-    {
-        id: "club-04",
-        titulo: "Manchester United",
-        imagen: "images/remeras clubes/Manchester United.jpg",
-        categoria: {
-            id: "clubes",
-            nombre: "Camisetas de Clubes",
-        },
-        precio: 90000
-    },
-    {
-        id: "club-05",
-        titulo: "Real Madrid",
-        imagen: "images/remeras clubes/Real Madrid.jpg",
-        categoria: {
-            id: "clubes",
-            nombre: "Camisetas de Clubes",
-        },
-        precio: 90000
-    },
-    {
-        id: "club-06",
-        titulo: "River Plate",
-        imagen: "images/remeras clubes/River Plate.jpg",
-        categoria: {
-            id: "clubes",
-            nombre: "Camisetas de Clubes",
-        },
-        precio: 85000
-    },
-
-    //Remeras de Paises
-    {
-        id: "pais-01",
-        titulo: "Alemania",
-        imagen: "images/remeras selecciones/Alemania.jpg",
-        categoria: {
-            id: "paises",
-            nombre: "Camisetas de Selecciones",
-        },
-        precio: 80000
-    },
-    {
-        id: "pais-02",
-        titulo: "Argentina",
-        imagen: "images/remeras selecciones/Argentina.jpg",
-        categoria: {
-            id: "paises",
-            nombre: "Camisetas de Selecciones",
-        },
-        precio: 80000
-    },
-    {
-        id: "pais-03",
-        titulo: "Brasil",
-        imagen: "images/remeras selecciones/Brasil.jpg",
-        categoria: {
-            id: "paises",
-            nombre: "Camisetas de Selecciones",
-        },
-        precio: 80000
-    },
-    {
-        id: "pais-04",
-        titulo: "Francia",
-        imagen: "images/remeras selecciones/Francia.jpg",
-        categoria: {
-            id: "paises",
-            nombre: "Camisetas de Selecciones",
-        },
-        precio: 80000
-    },
-    {
-        id: "pais-05",
-        titulo: "Inglaterra",
-        imagen: "images/remeras selecciones/Inglaterra.webp",
-        categoria: {
-            id: "paises",
-            nombre: "Camisetas de Selecciones",
-        },
-        precio: 80000
-    },
-    {
-        id: "pais-06",
-        titulo: "Italia",
-        imagen: "images/remeras selecciones/Italia.jpg",
-        categoria: {
-            id: "paises",
-            nombre: "Camisetas de Selecciones",
-        },
-        precio: 80000
-    },
-]
+let productos = [];
+fetch("./js/camisetas.json")
+    .then(response => response.json())
+    .then(data => {
+        camisetas = data;
+        cargarCamisetas(camisetas);
+    })
 
 const contenedorCamisetas = document.querySelector("#contenedor-camisetas");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
@@ -151,8 +33,6 @@ function cargarCamisetas(camisetasElegidas){
 
     actualizarBotonesAgregar();
 }
-
-cargarCamisetas(camisetas);
 
 botonesCategorias.forEach(boton => {
     boton.addEventListener("click", (e) => {
@@ -194,6 +74,27 @@ else{
 }
 
 function agregarAlCarrito(e){
+
+    Toastify({
+        text: "Camiseta agregada",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right", 
+        stopOnFocus: true,
+        style: {
+            background: "linear-gradient(to right, rgb(78, 141, 78), rgb(170, 166, 172))",
+            borderRadius: "2rem",
+            fontSize: "0.75rem",
+        },
+        offset: {
+            x: "1.5rem",
+            y: "1.5rem"
+        },
+        onClick: function(){}
+      }).showToast();
+
+
     const idBoton = e.currentTarget.id;
     const camisetaAgregada = camisetas.find(camiseta => camiseta.id === idBoton)
 
